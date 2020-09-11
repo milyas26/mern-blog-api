@@ -3,7 +3,6 @@ const app = express();
 
 app.use(() => {
     console.log("Hello server...");
-    console.log("hello world!")
 })
 
 app.listen(4000);
