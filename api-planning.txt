@@ -34,14 +34,63 @@ GROUP: Authentication
         }
     }
 
-    err-response: 
+    response: 
+    201 -> Register berhasil
     400 -> Input yang anda masukkan tidak valid
 
+======================================================
+
 [2] - Login
-    {root.api}/{version}/auth/login 
+    {root.api}/{version}/auth/login
+
+    req: {
+        "email": "emailpengguna@gmail.com",
+        "password": "password"
+    }
+
+    res: {
+        "message": "Login Success!",
+        "data": {
+            "id": 1,
+            "name": "Nama Pengguna",
+            "email": "emailpengguna@gmail.com",
+            "password": "password"
+        }
+    }
+
+====================================================================
+====================================================================
 
 GROUP: Blog
 [1] - Create Blog Post
+[POST] : {root.api}/{version}/blog/Post
+    req: {
+        "title": "Judul Blog",
+        "image": "gambar.jpg",
+        "body": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+    }
+
+    res: {
+        "message": "Create Blog Success!",
+        "data": {
+            "post_id": 1,
+            "title": "Judul Blog",
+            "image": "gambar.jpg",
+            "body": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+            "created_at": "12/10/2020",
+            "author": {
+                "uid": 1,
+                "name": "Nama Author"
+            }
+        }
+    }
+
+    response: 
+    201 -> Blog post berhasil dibuat
+    400 -> Input yang anda masukkan tidak valid
+
+==========================================================================
+
 [2] - Get Blog Post
 [3] - Update Blog Post
 [4] - Delete Blog Post

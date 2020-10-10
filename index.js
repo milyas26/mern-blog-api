@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const app = express();
-const productsRoutes = require("./src/routes/products");
+const authRoutes = require('./src/routes/auth');
+const blogRoutes = require('./src/routes/blog');
 
 app.use(bodyParser.json())
 
@@ -13,6 +14,17 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use('/v1/customer', productsRoutes)
+app.use('/v1/auth', authRoutes);
+app.use('/v1/blog', blogRoutes);
+
+app.use((error, req, res, next) => {
+    const status = error.errorStatus || 500;
+    const {message, data} = error;
+
+    res.status(status).json({
+        message: message,
+        data: data
+    })
+})
 
 app.listen(4000);
