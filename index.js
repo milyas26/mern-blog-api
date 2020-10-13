@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const path = require('path');
 const multer = require('multer');
 const app = express();
 const authRoutes = require('./src/routes/auth');
@@ -25,7 +26,8 @@ const fileFilter = (req, file, cb) => {
     }
 }
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'))
 
 // Mengatasi Error CORS

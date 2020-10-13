@@ -9,4 +9,6 @@ router.post(
   blogController.createBlogPost
 );
 
+router.get('/posts', blogController.getAllBlogPost)
+
 module.exports = router;
